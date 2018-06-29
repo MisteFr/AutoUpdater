@@ -17,7 +17,7 @@ class EventHandler implements Listener{
         $this->plugin = $plugin;
     }
 
-    public function onUpdateNotifyEvent(UpdateNotifyEvent $event){
+    public function onUpdateNotifyEvent(UpdateNotifyEvent $event) : void{
     	$updateInfos = $event->getUpdater()->getUpdateInfo();
 
         if($this->plugin->config->get("lastUpdateDate") !== $updateInfos["date"]){
