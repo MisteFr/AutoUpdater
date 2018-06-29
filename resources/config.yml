@@ -1,0 +1,2 @@
+#Please put true to 'autoUpdate' if you want the server to be automatically updated when you start it
+autoUpdate: false
