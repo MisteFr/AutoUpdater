@@ -1,2 +1,5 @@
 #Please put true to 'autoUpdate' if you want the server to be automatically updated when you start it
 autoUpdate: false
+
+#If you are on Linux and have pntcl extension compiled with PHP you can enable this feature
+restartAfterUpdate: false

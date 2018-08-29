@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Miste\autoupdater;
 
@@ -10,18 +10,21 @@ use pocketmine\utils\Config;
 
 class AutoUpdater extends PluginBase{
 
-public $config;
+	public $config;
 
-public function onEnable() : void{
+	public function onEnable() : void{
+		$this->getServer()->getPluginManager()->registerEvents(new EventHandler($this), $this);
 
-	$this->getServer()->getPluginManager()->registerEvents(new EventHandler($this), $this);
+		if(!is_dir($this->getDataFolder())){
+			mkdir($this->getDataFolder());
+		}
+		$this->saveResource("config.yml");
 
-	if (!is_dir($this->getDataFolder())){
-		mkdir($this->getDataFolder());
-	}
-	$this->saveResource("config.yml");
+		$this->config = new Config($this->getDataFolder() . "config.yml");
 
-	$this->config = new Config($this->getDataFolder() . "config.yml");
-	
+		if($this->config->get("restartAfterUpdate") === false){
+			$this->config->set("restartAfterUpdate", false);
+			$this->config->save();
+		}
 	}
 }
